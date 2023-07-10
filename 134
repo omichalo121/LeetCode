@@ -1,0 +1,17 @@
+class Solution {
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        int sum = 0, avail = 0, index = 0;
+        for (int i = 0, l = gas.length; i < l; i++) {
+            sum += gas[i] - cost[i];
+            avail += gas[i] - cost[i];
+            if (avail < 0) {
+                avail = 0;
+                index = i + 1;
+            }
+        }
+        if (sum < 0) {
+            return -1;
+        }
+        return index;
+    }
+}
