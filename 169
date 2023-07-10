@@ -1,0 +1,21 @@
+class Solution {
+    public int majorityElement(int[] nums) {
+        HashMap<Integer, Integer> numCount = new HashMap<>();
+        for (int num : nums) {
+            if (numCount.containsKey(num)) {
+                numCount.put(num, numCount.get(num) + 1);
+            } else {
+                numCount.put(num, 1);
+            }
+        }
+        
+        for (int num : numCount.keySet()) {
+            int count = numCount.get(num);
+            double percent = ((double) count / nums.length) * 100;
+            if (percent >= 50) {
+                return num;
+            }
+        }
+        return 0;
+    }
+}
