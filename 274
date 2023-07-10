@@ -1,0 +1,18 @@
+class Solution {
+    public int hIndex(int[] citations) {
+        int checker = 0;
+        while (true) {
+            int sum = 0;
+            for (int i = 0, l = citations.length; i < l; i++) {
+                if (citations[i] >= checker && checker <= l) {
+                    sum++;
+                }
+            }
+            if (sum >= checker) {
+                checker++;
+            } else {
+                return checker-1;
+            }
+        } 
+    }
+}
