@@ -1,0 +1,26 @@
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        HashMap<Integer, Integer> numbers = new LinkedHashMap<>();
+        int index = 0;
+
+        for (int num : nums) {
+            if (numbers.containsKey(num)) {
+                numbers.put(num, numbers.get(num) + 1);
+            } else {
+                numbers.put(num, 1);
+            }
+        }
+        for (int num : numbers.keySet()) {
+            int count = numbers.get(num);
+            if (count > 2) {
+                count = 2;
+            }
+
+            for (int  i = 0; i < count; i++){
+                nums[index] = num;
+                index++;
+            }
+        } 
+        return index;
+    }
+}
