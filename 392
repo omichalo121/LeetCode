@@ -1,0 +1,14 @@
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        int index = -1, count = 0, l = s.length();
+        for (int i = 0; i < l; i++) {
+            String getChar = Character.toString(s.charAt(i));
+            int currIndex = t.indexOf(getChar, index+1);
+            if (currIndex > index) {
+                index = currIndex;
+                count++;
+            } else { return false;}
+        }
+        return count==l;
+    }
+}
