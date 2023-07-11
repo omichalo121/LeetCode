@@ -1,0 +1,37 @@
+class Solution {
+    public String intToRoman(int num) {
+        HashMap<String, Integer> roman = new LinkedHashMap<>();
+
+        roman.put("M", 1000);
+        roman.put("CM", 900);
+        roman.put("D", 500);
+        roman.put("CD", 400);
+        roman.put("C", 100);
+        roman.put("XC", 90);
+        roman.put("L", 50);
+        roman.put("XL", 40);
+        roman.put("X", 10);
+        roman.put("IX", 9);
+        roman.put("V", 5);
+        roman.put("IV", 4);
+        roman.put("I", 1);
+      
+        String romanNum = "none";
+
+        while (num != 0) {
+            for (String key : roman.keySet()) {
+                int value = roman.get(key);
+                if (num >= value) {
+                    int times = (int) Math.floor(num/value);
+                    for (int i = 0; i < times; i++) {
+                        if (romanNum.equals("none")) {
+                            romanNum = key;
+                        } else { romanNum+= key;}
+                    }
+                    num -= value * times;
+                } else { continue; }
+            }
+        }
+        return romanNum;
+    }
+}
