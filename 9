@@ -1,0 +1,17 @@
+class Solution {
+    public boolean isPalindrome(int x) {
+        String X = String.valueOf(x);
+        int n = X.length();
+        int left = 0, right = n - 1, count = 0;
+        while (left < right) {
+            String L = Character.toString(X.charAt(left));
+            String R = Character.toString(X.charAt(right));
+            if (L.equals(R)) {
+                count++;
+            }
+            left++;
+            right--;
+        }
+        return count == Math.floor(n / 2);
+    }
+}
