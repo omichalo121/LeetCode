@@ -1,0 +1,21 @@
+class Solution {
+    public int searchInsert(int[] nums, int target) {
+        // Base case
+        int n = nums.length;
+        if (nums[0] > target) {
+            return 0;
+        } else if (nums[n-1] < target) {
+            return n;
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (target == nums[i]) {
+                return i;
+            }
+            if (nums[i] > target) {
+                return i;
+            }
+        }
+        return 0;
+    }
+}
