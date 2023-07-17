@@ -1,0 +1,57 @@
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number[]}
+ */
+var maxSlidingWindow = function(nums, k) {
+    let deque = [];
+    let maxNums = [];
+    let max = -Infinity;
+    let maxIndex = 0;
+    let right = 0;
+
+
+    while (right < nums.length) {
+
+        while (right < k) {
+            deque.push(nums[right]);
+            if (max <= nums[right]) {
+                max = nums[right];
+                maxIndex = right;
+            }
+            right++;
+            if (right === k) {
+                maxNums.push(max);
+            }
+        }
+
+        deque.splice(0, maxIndex);
+        maxIndex = 0;
+        if (k === 1) {
+            deque.splice(0, 1);
+            max = -Infinity;
+        }
+
+        if (deque.length === k && maxIndex === 0) {
+            max = -Infinity;
+            deque.splice(0, 1);
+            for (let i = 0, n = deque.length; i < n; i++) {
+                if (deque[i] >= max) {
+                    max = deque[i];
+                    maxIndex = i;
+                }
+            }
+        }
+
+        deque.push(nums[right]);
+        if (nums[right] >= max) {
+            max = nums[right];
+            maxIndex = deque.length - 1;
+            maxNums.push(max);
+        } else if (max > nums[right]){
+            maxNums.push(max);
+        }
+        right++;
+    }
+    return maxNums;
+};
