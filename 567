@@ -1,0 +1,61 @@
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+        HashMap<Integer, Integer> check = new HashMap<>();
+        int checkNum = 0, wordNum = 0;
+        for (int i = 0, l = s1.length(); i < l; i++) {
+            if (!check.containsKey(s1.charAt(i) - 'a')) {
+                check.put(s1.charAt(i) - 'a', 1);
+                checkNum++;
+            } else {
+                check.put(s1.charAt(i) - 'a', check.get(s1.charAt(i) - 'a') + 1);
+            }
+        }
+        int left = 0, right = 0;
+        int[] letters = new int[26];
+
+        while(right < s2.length()) {
+            if (right < s1.length()) {
+                letters[s2.charAt(right) - 'a']++;
+                right++;
+                if (right == s1.length()) {
+                    for (int i = 0; i < 26; i++) {
+                        if (letters[i] == 0) {
+                            continue;
+                        } else if (check.containsKey(i)){
+                            if (check.get(i) == letters[i]) {
+                                wordNum++;
+                                if (wordNum == checkNum) {
+                                    return true;
+                                }
+                            } else { break; }
+                        } else if (!check.containsKey(i)) {
+                            break;
+                        }
+                    }
+                }
+                continue;
+            }
+
+            letters[s2.charAt(left) - 'a']--;
+            letters[s2.charAt(right) - 'a']++;
+            wordNum = 0;
+            for (int i = 0; i < 26; i++) {
+                if (letters[i] == 0) {
+                    continue;
+                } else if (check.containsKey(i)){
+                    if (check.get(i) == letters[i]) {
+                        wordNum++;
+                        if (wordNum == checkNum) {
+                            return true;
+                        }
+                    } else { break; }
+                } else if (!check.containsKey(i)) {
+                    break;
+                }
+            }
+            left++;
+            right++;
+        }
+    return wordNum == checkNum;
+    }
+}
