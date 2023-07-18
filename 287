@@ -1,0 +1,15 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var findDuplicate = function(nums) {
+    let numbers = new Map();
+    for (let i = 0, n = nums.length; i < n; i++) {
+        if(!numbers.has(nums[i])) {
+            numbers.set(nums[i]);
+        } else {
+            return nums[i];
+        }
+    }
+    return 0;
+};
