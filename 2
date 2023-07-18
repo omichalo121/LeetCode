@@ -1,0 +1,37 @@
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var addTwoNumbers = function(l1, l2) {
+    let number1 = "";
+    let number2 = "";
+
+    while (l1) {
+        number1 = l1.val.toString() + number1;
+        l1 = l1.next;
+    }
+
+    while (l2) {
+        number2 = l2.val.toString() + number2;
+        l2 = l2.next;
+    }
+
+    let strSum = (BigInt(number1) + BigInt(number2)).toString();
+    let head = new ListNode();
+    let copy = head;
+    for (let i = strSum.length - 1; 0 <= i; i--) {
+        let node = new ListNode(parseInt(strSum[i]))
+        copy.next = node;
+        copy = copy.next;
+    }
+    head = head.next;
+    return head;
+};
