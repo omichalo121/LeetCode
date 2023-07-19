@@ -11,6 +11,7 @@
  */
 var mergeKLists = function(lists) {
     let storage  = new Map();
+    let nodeVals = [];
     let head = new ListNode();
     let dummy = head;
     let min = Infinity;
@@ -24,9 +25,7 @@ var mergeKLists = function(lists) {
         let cur = lists[i];
         while (cur) {
             if (!storage.has(cur.val)) {
-                if(cur.val < min) {
-                    min = cur.val;
-                }
+                nodeVals.push(cur.val);
                 let nodeList = [];
                 let node = new ListNode(cur.val);
                 nodeList.push(node);
@@ -38,19 +37,19 @@ var mergeKLists = function(lists) {
             cur = cur.next;
         }
     }
-    console.log(storage);
+    nodeVals.sort((a, b) => a - b);
 
-    while(storage.size !== 0) {
-        if (storage.has(min)) {
-            let nodeList = storage.get(min);
+    while(nodeVals.length > 0) {
+        let val = nodeVals.shift();
+        if (storage.has(val)) {
+            let nodeList = storage.get(val);
             while (nodeList.length > 0) {
                 let cur = nodeList.pop();
                 dummy.next = cur;
                 dummy = dummy.next;
             }
-            storage.delete(min);
+            storage.delete(val);
         }
-        min++;
     }
     return head.next;
 };
