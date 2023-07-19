@@ -1,0 +1,39 @@
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var index = 0;
+var count 
+var numbers = [];
+var rightSideView = function(root) {
+    numbers = [];
+    side(root);
+    return numbers;
+};
+
+var side = function(node) {
+    if(!node) {
+        return;
+    }
+    
+    if (index === numbers.length){
+        index++;
+        numbers.push(node.val);
+        side(node.right);
+        side(node.left);
+    } else {
+        index++;
+        side(node.right);
+        side(node.left);
+    }
+    index--;
+    return
+}
