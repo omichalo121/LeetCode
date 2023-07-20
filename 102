@@ -1,0 +1,48 @@
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[][]}
+ */
+
+var whole = [];
+var storage = new Map();
+var maxLevel = 0;
+var levelOrder = function(root) {
+    whole = [];
+    maxLevel = 0;
+    storage.clear();
+    appendWhole(root, 0);
+
+    for (let i = 0; i < maxLevel; i++) {
+        if (storage.has(i)) {
+            whole.push(storage.get(i));
+        }
+    }
+    return whole;
+};
+
+var appendWhole = function (node, level) {
+    if(!node) {
+        return;
+    }
+    if(!storage.has(level)) {
+        let list = [];
+        list.push(node.val);
+        storage.set(level, list);
+    } else {
+        let list = storage.get(level);
+        list.push(node.val);
+        storage.set(level, list);
+    }
+    maxLevel++;
+    appendWhole(node.left, level + 1);
+    appendWhole(node.right, level + 1);
+    return;
+}
