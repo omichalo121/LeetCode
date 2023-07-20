@@ -1,0 +1,22 @@
+var count = 0;
+
+var buildTree = function(preorder, inorder) {
+    count = 0;
+    return build(preorder, inorder, 0, inorder.length - 1);
+};
+
+var build = function(preorder, inorder, start, end) {
+    if (count >= preorder.length || start > end) {
+        return null;
+    }
+
+    let node = new TreeNode(preorder[count]);
+    count++;
+
+    let index = inorder.indexOf(node.val);
+
+    node.left = build(preorder, inorder, start, index - 1);
+    node.right = build(preorder, inorder, index + 1, end);
+
+    return node;
+};
