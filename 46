@@ -1,0 +1,26 @@
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var permute = function(nums) {
+    answer = [];
+    perm(nums, []);
+    return answer;
+};
+
+var perm = function(nums, set) {
+    if(set.length === nums.length) {
+        answer.push([...set]);
+        return;
+    }
+
+    for(let i = 0, l = nums.length; i < l; i++) {
+        if(set.includes(nums[i])) {
+            continue;
+        }
+        set.push(nums[i]);
+        perm(nums, set);
+        set.pop();
+    }
+    return;
+}
