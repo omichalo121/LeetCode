@@ -1,0 +1,31 @@
+/**
+ * @param {number[]} candidates
+ * @param {number} target
+ * @return {number[][]}
+ */
+var combinationSum2 = function(candidates, target) {
+    candidates.sort((a, b) => a - b);
+    answer = [];
+    comb(candidates, target, [], 0);
+    return answer;
+};
+
+var comb = function(candidates, target, set, index) {
+    if (target === 0) {
+        answer.push([...set]);
+        return;
+    }
+
+    for(let i = index, n = candidates.length; i < n; i++) {
+        if(i > index && candidates[i] === candidates[i - 1]) {
+            continue;
+        }
+        if (target < candidates[i]) {
+            break;
+        }
+        set.push(candidates[i]);
+        comb(candidates, target - candidates[i], set, i + 1);
+        set.pop();
+    }
+    return;
+}
