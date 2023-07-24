@@ -1,0 +1,23 @@
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var subsetsWithDup = function(nums) {
+    nums.sort((a, b) => a - b);
+    answer = [];
+    subs(nums, [], 0);
+    return answer;
+};
+
+var subs = function(nums, set, index) {
+    answer.push([...set]);
+
+    for(let i = index, n = nums.length; i < n; i++) {
+        if (i === index || nums[i] !== nums[i - 1]) {
+            set.push(nums[i]);
+            subs(nums, set, i + 1, answer);
+            set.pop();
+        }
+    }
+    return;
+}
